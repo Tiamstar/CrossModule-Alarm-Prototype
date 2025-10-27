@@ -8,4 +8,5 @@ def compute_ratio(y: int) -> float:
 
 
 if __name__ == "__main__":
+
    print(compute_ratio(0))
