@@ -1,26 +1,20 @@
 # main.py
 
-"""
-文件 A: 使用配置的主程序
-这是Pylint将报告告警的“位置”文件。
-"""
 
-from config_loader import get_config
+from data_processor import DataProcessor
 
-def connect_to_api():
+def generate_report(data):
     """
-    使用配置连接API。
+    创建处理器并生成报告。
     """
-    app_config = get_config()
+    processor = DataProcessor(data)
     
-    print("Connecting to API...")
-    
-    # !! Pylint 将在这里报告告警 !!
-    # E1101: Instance of 'Config' has no 'api_key' member
-    if app_config.api_key:
-        print(f"Using key: {app_config.api_key[:3]}...")
-    else:
-        print("API key is missing!")
+    result = processor.process()
+    print(f"Total result: {result}")
+
+    score = processor._calculate_score()
+    print(f"Directly accessed score: {score}")
 
 if __name__ == "__main__":
-    connect_to_api()
+    sample_data = [10, 20, 30]
+    generate_report(sample_data)
